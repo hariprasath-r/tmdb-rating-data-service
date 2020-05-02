@@ -1,0 +1,13 @@
+server:
+  port: 8300
+  error.include-stacktrace: never
+
+spring:
+  application.name: rating-data-service
+  h2:
+    console:
+      enabled: true
+  jpa:
+    show-sql: true
+
+management.endpoints.web.exposure.include: "*"
