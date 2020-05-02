@@ -54,7 +54,7 @@ public class WatchlistController {
         return ResponseEntity.accepted().build();
     }
 
-    @ApiOperation(value = "Deleting all movies for a user.")
+    @ApiOperation(value = "Deleting a movie for a user.")
     @ApiResponses(value = {
             @ApiResponse(code = 202, message = "Will be deleted shortly."),
             @ApiResponse(code = 404, message = "User or movie is not found.")
