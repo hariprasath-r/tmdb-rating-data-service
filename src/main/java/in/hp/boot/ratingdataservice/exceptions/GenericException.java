@@ -11,7 +11,9 @@ public class GenericException {
         this.details = details;
     }
 
-    public String getTimestamp() { return timestamp; }
+    public String getTimestamp() {
+        return timestamp;
+    }
 
     public String getMessage() {
         return message;
