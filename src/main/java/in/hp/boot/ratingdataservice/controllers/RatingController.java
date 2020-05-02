@@ -19,8 +19,8 @@ public class RatingController {
     }
 
     @GetMapping("/{userId}/{movieId}")
-    public void getRatingForMovie(@PathVariable String userId, @PathVariable String movieId) {
-
+    public RatingModel getRatingForMovie(@PathVariable String userId, @PathVariable String movieId) {
+        return ratingService.getRatingForMovie(userId, movieId);
     }
 
     @PostMapping("/{userId}")
@@ -28,9 +28,9 @@ public class RatingController {
         ratingService.addRatingForUser(userId, ratingModel);
     }
 
-    @PutMapping("/{userId}/{movieId}")
-    public void updateRatingForMovie(@PathVariable String userId, @PathVariable String movieId) {
-
+    @PutMapping("/{userId}")
+    public void updateRatingForMovie(@PathVariable String userId, @RequestBody RatingModel ratingModel) {
+        ratingService.updateRatingForUser(userId, ratingModel);
     }
 
     @DeleteMapping("/{userId}")

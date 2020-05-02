@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,5 +29,23 @@ public class RatingService {
     public void addRatingForUser(String userId, RatingModel ratingModel) {
         CompositeKey compositeKey = new CompositeKey(userId, ratingModel.getMovieId());
         ratingRepository.save(new Rating(compositeKey, ratingModel.getRating()));
+    }
+
+    public RatingModel getRatingForMovie(String userId, String movieId) {
+        Optional<Rating> optionalRating = ratingRepository.findById(new CompositeKey(userId, movieId));
+        if (optionalRating.isPresent()) {
+            Rating rating = optionalRating.get();
+            return new RatingModel(rating.getCompositeKey().getMovieId(), rating.getRating());
+        }
+        return null;
+    }
+
+    public void updateRatingForUser(String userId, RatingModel ratingModel) {
+        CompositeKey compositeKey = new CompositeKey(userId, ratingModel.getMovieId());
+        Optional<Rating> optionalRating = ratingRepository.findById(compositeKey);
+        optionalRating.ifPresent(rating -> {
+            rating.setRating(ratingModel.getRating());
+            ratingRepository.save(rating);
+        });
     }
 }
