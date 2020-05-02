@@ -43,4 +43,10 @@ public class WatchlistService {
             throw new ResourceNotFoundException(ExceptionUtils.formExceptionMessageFromUserIdMovieId(userId, movieId));
         }
     }
+
+    public void deleteAllMoviesForUser(String userId) {
+        List<Watchlist> watchlists = watchlistRepository.findByCompositeKeyUserId(userId)
+                .<RuntimeException>orElseThrow(ExceptionUtils.getResourceNotFoundExceptionSupplier(userId));
+        watchlistRepository.deleteAll(watchlists);
+    }
 }

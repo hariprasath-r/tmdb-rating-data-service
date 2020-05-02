@@ -26,8 +26,14 @@ public class WatchlistController {
     }
 
     @GetMapping("/{userId}")
-    public WatchlistDto getWatchlistForUser(@PathVariable String userId) {
-        return watchlistService.getWatchlistForUser(userId);
+    public ResponseEntity<WatchlistDto> getWatchlistForUser(@PathVariable String userId) {
+        return ResponseEntity.ok(watchlistService.getWatchlistForUser(userId));
+    }
+
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<Object> deleteAllMoviesForUser(@PathVariable String userId) {
+        watchlistService.deleteAllMoviesForUser(userId);
+        return ResponseEntity.accepted().build();
     }
 
     @DeleteMapping("/{userId}/{movieId}")
