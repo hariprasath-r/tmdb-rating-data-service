@@ -34,12 +34,12 @@ public class RatingController {
     }
 
     @DeleteMapping("/{userId}")
-    public void deleteRatingsForUser(@PathVariable String userId) {
-
+    public void deleteAllRatingsForUser(@PathVariable String userId) {
+        ratingService.deleteAllRatingsForUser(userId);
     }
 
     @DeleteMapping("/{userId}/{movieId}")
     public void deleteRatingForMovie(@PathVariable String userId, @PathVariable String movieId) {
-
+        ratingService.deleteRatingForUser(userId, movieId);
     }
 }

@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface RatingRepository extends JpaRepository<Rating, CompositeKey> {
     List<Rating> findByCompositeKeyUserId(String userId);
+
+    void deleteByCompositeKeyUserId(String userId);
 }
