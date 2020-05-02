@@ -1,4 +1,4 @@
-package in.hp.boot.userinfoservice.exceptions;
+package in.hp.boot.ratingdataservice.exceptions;
 
 public class GenericException {
     private final String timestamp;

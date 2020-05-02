@@ -1,4 +1,4 @@
-package in.hp.boot.userinfoservice.exceptions;
+package in.hp.boot.ratingdataservice.exceptions;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -23,12 +23,18 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(genericException, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler(ResourceNotFoundException.class)
+    @ExceptionHandler({ResourceNotFoundException.class})
     public final ResponseEntity<Object> handleAllException(ResourceNotFoundException ex, WebRequest request) {
         GenericException genericException = new GenericException(
                 new Date().toString(), ex.getMessage(), request.getDescription(false));
-//        return new ResponseEntity<>(genericException, HttpStatus.NOT_FOUND);
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(genericException);
+    }
+
+    @ExceptionHandler({ResourceConflictException.class})
+    public final ResponseEntity<Object> handleAllException(ResourceConflictException ex, WebRequest request) {
+        GenericException genericException = new GenericException(
+                new Date().toString(), ex.getMessage(), request.getDescription(false));
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(genericException);
     }
 
     @Override
