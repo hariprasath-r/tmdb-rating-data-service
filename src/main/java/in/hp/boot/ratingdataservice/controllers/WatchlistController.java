@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/v1/wishlist")
+@RequestMapping("/v1/watchlist")
 public class WatchlistController {
 
     @Autowired
