@@ -16,5 +16,5 @@ public class WatchlistDto {
     private String userId;
 
     @ApiModelProperty(name = "Movies", notes = "Movies in user watchlist")
-    private List<String> movieId;
+    private List<String> movies;
 }
