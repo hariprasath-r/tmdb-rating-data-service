@@ -1,3 +1,6 @@
 spring:
   application.name: rating-data-service
-
+  profiles.active: default
+  cloud:
+    config:
+      uri: http://localhost:8899
