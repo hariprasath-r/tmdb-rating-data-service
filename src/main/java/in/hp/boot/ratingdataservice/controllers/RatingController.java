@@ -6,6 +6,7 @@ import in.hp.boot.ratingdataservice.services.RatingService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 
+@Slf4j
 @RestController
 @RequestMapping("/v1/ratings")
 public class RatingController {
@@ -28,6 +30,7 @@ public class RatingController {
     })
     @GetMapping("/{userId}")
     public ResponseEntity<RatingDto> getRatingsForUser(@PathVariable String userId) {
+        log.info("getRatingsForUser");
         return ResponseEntity.ok(ratingService.getRatingsForUser(userId));
     }
 
@@ -39,6 +42,7 @@ public class RatingController {
     @GetMapping("/{userId}/{movieId}")
     public ResponseEntity<RatingModel> getRatingForMovie(@PathVariable String userId,
                                                          @PathVariable String movieId) {
+        log.info("getRatingForMovie");
         return ResponseEntity.ok(ratingService.getRatingForMovie(userId, movieId));
     }
 
@@ -50,6 +54,7 @@ public class RatingController {
     @PostMapping("/{userId}")
     public ResponseEntity<Object> setRatingForUser(@PathVariable String userId,
                                                    @Valid @RequestBody RatingModel ratingModel) {
+        log.info("setRatingForUser");
         ratingService.addRatingForUser(userId, ratingModel);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .buildAndExpand()
@@ -65,6 +70,7 @@ public class RatingController {
     @PutMapping("/{userId}")
     public ResponseEntity<Object> updateRatingForMovie(@PathVariable String userId
             , @Valid @RequestBody RatingModel ratingModel) {
+        log.info("updateRatingForMovie");
         ratingService.updateRatingForUser(userId, ratingModel);
         return ResponseEntity.accepted().build();
     }
@@ -76,6 +82,7 @@ public class RatingController {
     })
     @DeleteMapping("/{userId}")
     public ResponseEntity<Object> deleteAllRatingsForUser(@PathVariable String userId) {
+        log.info("deleteAllRatingsForUser");
         ratingService.deleteAllRatingsForUser(userId);
         return ResponseEntity.accepted().build();
     }
@@ -88,6 +95,7 @@ public class RatingController {
     @DeleteMapping("/{userId}/{movieId}")
     public ResponseEntity<Object> deleteRatingForMovie(@PathVariable String userId,
                                                        @PathVariable String movieId) {
+        log.info("deleteRatingForMovie");
         ratingService.deleteRatingForUser(userId, movieId);
         return ResponseEntity.accepted().build();
     }
