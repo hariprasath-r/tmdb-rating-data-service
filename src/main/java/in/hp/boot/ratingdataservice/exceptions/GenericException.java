@@ -1,5 +1,8 @@
 package in.hp.boot.ratingdataservice.exceptions;
 
+import lombok.ToString;
+
+@ToString
 public class GenericException {
     private final String timestamp;
     private final String message;

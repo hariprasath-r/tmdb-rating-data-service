@@ -5,6 +5,7 @@ import in.hp.boot.ratingdataservice.services.WatchlistService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 
+@Slf4j
 @RestController
 @RequestMapping("/v1/watchlist")
 public class WatchlistController {
@@ -26,6 +28,7 @@ public class WatchlistController {
     })
     @PostMapping("/{userId}/{movieId}")
     public ResponseEntity<Object> addMovieToWatchlistForUser(@PathVariable String userId, @PathVariable String movieId) {
+        log.info("addMovieToWatchlistForUser");
         watchlistService.addMovieToUserWatchlist(userId, movieId);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .buildAndExpand()
@@ -40,6 +43,7 @@ public class WatchlistController {
     })
     @GetMapping("/{userId}")
     public ResponseEntity<WatchlistDto> getWatchlistForUser(@PathVariable String userId) {
+        log.info("getWatchlistForUser");
         return ResponseEntity.ok(watchlistService.getWatchlistForUser(userId));
     }
 
@@ -50,6 +54,7 @@ public class WatchlistController {
     })
     @DeleteMapping("/{userId}")
     public ResponseEntity<Object> deleteAllMoviesForUser(@PathVariable String userId) {
+        log.info("deleteAllMoviesForUser");
         watchlistService.deleteAllMoviesForUser(userId);
         return ResponseEntity.accepted().build();
     }
@@ -61,6 +66,7 @@ public class WatchlistController {
     })
     @DeleteMapping("/{userId}/{movieId}")
     public ResponseEntity<Object> deleteMovieFromUser(@PathVariable String userId, @PathVariable String movieId) {
+        log.info("deleteMovieFromUser");
         watchlistService.deleteMovieFromUser(userId, movieId);
         return ResponseEntity.accepted().build();
     }
